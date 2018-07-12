@@ -1,0 +1,14 @@
+.header {
+  height: 125px;
+  padding-top: 3rem;
+}
+
+.datepicker {
+  width: 45%;
+  margin: 0 auto;
+}
+
+.form-control {
+  width: 50%;
+  margin: 0 auto;
+}
