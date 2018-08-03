@@ -4,42 +4,42 @@ $(document).ready(function(){
   });
 
   $('#dateInput').on('change',function(){
-    //when the date is selected, grab that shit from the input field
+    // Retrieve the selected date from the input field
     let selectedDate = $('.active').attr('data-date');
 
-    //cram that shit into a date object
+    // cram that date into a date object
     let date = new Date(parseInt(selectedDate));
 
-    //the datepicker returns a day prior to the date selected for whatever fucking reason. Add 1 to that shit
+    // the datepicker returns a day prior to the date selected for whatever reason, so add 1 to it
     date.setDate(date.getDate() + 1);
     
-    //get month and day of month from selected date
+    // get month and day of month from selected date
     let month = date.getMonth();
     let day = date.getDate();
     
-    //the object used to store the six weeks prior date
+    // the object used to store the six weeks prior date
     let dateMinSix = new Date(date);
     
-    //go back six weeks
+    // go back six weeks
     dateMinSix.setDate(dateMinSix.getDate() - 43);
     
-    //get day of the week from six weeks back
+    // get day of the week from six weeks back
     let weekday = dateMinSix.getDay();
 
-    //instantiate the purchaseDate object
+    // instantiate the purchaseDate object
     let purchaseDate = new Date(dateMinSix);
 
-    //find days difference between purchase date and nearest Tuesday(2)
+    // find days difference between purchase date and nearest Tuesday(2)
     let addDays = findTuesday(weekday);
 
-    //figure out if you need to add or subtract to get to Tuesday, else don't change it
+    // figure out if you need to add or subtract to get to Tuesday, else don't change it
     if(weekday > 2){
       purchaseDate.setDate(purchaseDate.getDate() - addDays);
     } else if(weekday < 2){
       purchaseDate.setDate(purchaseDate.getDate() + addDays);
     }
     
-    //figure out how many days apart the flight date is from the purchase Tuesday date
+    // figure out how many days apart the flight date is from the purchase Tuesday date
     function findTuesday(start){
       let tuesday = 2;
       if(start < tuesday){
@@ -51,7 +51,7 @@ $(document).ready(function(){
         }
       }
 
-    //spit that shit out onto the page
+    // output the purchase date onto the page
     $('#dateInput').val(purchaseDate.toDateString());
   });
 });
